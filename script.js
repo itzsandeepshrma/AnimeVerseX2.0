@@ -49,7 +49,7 @@ function showDetails(anime) {
     <p><strong>Type:</strong> ${anime.type}</p>
     <p><strong>Status:</strong> ${anime.status}</p>
     <p><strong>Episodes:</strong> ${anime.episodes}</p>
-    <p><strong>Score:</strong> ⭐ ${anime.score || 'N/A'}</p>
+    <p><strong>Rating:</strong> ${anime.score || 'N/A'}</p>
     <p><strong>Aired:</strong> ${anime.aired?.string || 'N/A'}</p>
     <p><strong>Synopsis:</strong> ${anime.synopsis || 'No synopsis available.'}</p>
   `;
