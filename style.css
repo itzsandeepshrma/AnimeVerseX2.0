@@ -69,44 +69,93 @@ button:hover {
   padding: 0 1rem;
 }
 
-.anime-box {
+.card {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 1rem;
   text-align: center;
   box-shadow: 0 0 20px var(--shadow);
   transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
-.anime-box:hover {
+.card:hover {
   transform: translateY(-6px);
 }
 
-.anime-box img {
+.card img {
   width: 100%;
   height: 400px;
   object-fit: cover;
   border-radius: 12px;
 }
 
-.anime-box h3 {
+.title {
   color: #ffccff;
   font-size: 1.3rem;
   margin: 0.8rem 0 0.4rem;
 }
 
-.anime-box .info {
+.info {
   font-size: 0.95rem;
   color: #ccc;
   margin-bottom: 0.4rem;
 }
 
-.anime-box .synopsis {
+.synopsis {
   font-size: 0.9rem;
   color: #aaa;
   max-height: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#modalContent {
+  background: #1a001f;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  color: white;
+  box-shadow: 0 0 25px var(--shadow);
+  overflow-y: auto;
+  max-height: 80vh;
+  position: relative;
+}
+
+#modalContent h2 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+#animeTrailer {
+  margin-top: 1rem;
+  width: 100%;
+  height: 300px;
+  border-radius: 8px;
+  display: block;
+}
+
+#modalClose {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #ffcccc;
 }
 
 footer {
