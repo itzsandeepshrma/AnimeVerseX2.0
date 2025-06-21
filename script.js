@@ -37,7 +37,7 @@ function displayResults(data) {
       <img src="${anime.images.jpg.image_url}" alt="${anime.title}">
       <div class="title">${anime.title}</div>
       <div class="info">Type: ${anime.type} • Episodes: ${anime.episodes}</div>
-      <div class="info">Score: Rating ${anime.score || 'N/A'}</div>
+      <div class="info">Rating: ⭐ ${anime.score || 'N/A'}</div>
       <div class="synopsis">${anime.synopsis || 'No synopsis available.'}</div>
     </div>
   `).join('');
@@ -49,7 +49,7 @@ function showDetails(anime) {
     <p><strong>Type:</strong> ${anime.type}</p>
     <p><strong>Status:</strong> ${anime.status}</p>
     <p><strong>Episodes:</strong> ${anime.episodes}</p>
-    <p><strong>Score:</strong> Rating ${anime.score || 'N/A'}</p>
+    <p><strong>Score:</strong> ⭐ ${anime.score || 'N/A'}</p>
     <p><strong>Aired:</strong> ${anime.aired?.string || 'N/A'}</p>
     <p><strong>Synopsis:</strong> ${anime.synopsis || 'No synopsis available.'}</p>
   `;
