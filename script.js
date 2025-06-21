@@ -22,7 +22,6 @@ function displayResults(data) {
       <img src="${anime.images.jpg.image_url}" alt="${anime.title}" />
       <h3>${anime.title}</h3>
       <div class="info"> Rating ${anime.score || 'N/A'} | ${anime.type} | ${anime.episodes || '?'} ep</div>
-      <div class="synopsis">${anime.synopsis || 'No synopsis available.'}</div>
     </div>
   `).join('');
 }
