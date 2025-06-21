@@ -15,7 +15,7 @@ searchInput.addEventListener('keyup', async function (e) {
 });
 
 async function showTopAnime() {
-  const res = await fetch("https://api.jikan.moe/v4/top/anime?limit=10");
+  const res = await fetch("https://api.jikan.moe/v4/top/anime?limit=12");
   const json = await res.json();
   displayResults(json.data);
 }
@@ -26,7 +26,7 @@ function displayResults(data) {
       <img src="${anime.images.jpg.image_url}" alt="${anime.title}">
       <div class="title">${anime.title}</div>
       <div class="info">Type: ${anime.type} • Episodes: ${anime.episodes}</div>
-      <div class="info">Score: ⭐ ${anime.score || 'N/A'}</div>
+      <div class="info">Score: ${anime.score || 'N/A'}</div>
       <div class="synopsis">${anime.synopsis || 'No synopsis available.'}</div>
     </div>
   `).join('');
