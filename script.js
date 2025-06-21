@@ -5,7 +5,6 @@ const animeTitle = document.getElementById('animeTitle');
 const animeDetails = document.getElementById('animeDetails');
 const animeTrailer = document.getElementById('animeTrailer');
 const modalClose = document.getElementById('modalClose');
-const recommendContent = document.getElementById("recommendContent");
 
 let topAnimeList = [];
 
@@ -27,7 +26,6 @@ async function showTopAnime() {
     const json = await res.json();
     topAnimeList = json.data;
     displayResults(topAnimeList);
-    startAutoRecommend(); // Optional
   } catch (error) {
     resultsDiv.innerHTML = `<p style="color:red;">Unable to load top anime.</p>`;
   }
@@ -39,7 +37,7 @@ function displayResults(data) {
       <img src="${anime.images.jpg.image_url}" alt="${anime.title}">
       <div class="title">${anime.title}</div>
       <div class="info">Type: ${anime.type} • Episodes: ${anime.episodes}</div>
-      <div class="info">Score: ⭐ ${anime.score || 'N/A'}</div>
+      <div class="info">Score: Rating ${anime.score || 'N/A'}</div>
       <div class="synopsis">${anime.synopsis || 'No synopsis available.'}</div>
     </div>
   `).join('');
@@ -48,14 +46,13 @@ function displayResults(data) {
 function showDetails(anime) {
   animeTitle.textContent = anime.title;
   animeDetails.innerHTML = `
-    <strong>Type:</strong> ${anime.type}<br>
-    <strong>Episodes:</strong> ${anime.episodes}<br>
-    <strong>Score:</strong> ${anime.score}<br>
-    <strong>Status:</strong> ${anime.status}<br>
-    <strong>Aired:</strong> ${anime.aired?.string || 'N/A'}<br><br>
-    ${anime.synopsis || 'No synopsis available.'}
+    <p><strong>Type:</strong> ${anime.type}</p>
+    <p><strong>Status:</strong> ${anime.status}</p>
+    <p><strong>Episodes:</strong> ${anime.episodes}</p>
+    <p><strong>Score:</strong> Rating ${anime.score || 'N/A'}</p>
+    <p><strong>Aired:</strong> ${anime.aired?.string || 'N/A'}</p>
+    <p><strong>Synopsis:</strong> ${anime.synopsis || 'No synopsis available.'}</p>
   `;
-
   if (anime.trailer && anime.trailer.embed_url) {
     animeTrailer.src = anime.trailer.embed_url;
     animeTrailer.style.display = "block";
@@ -63,13 +60,7 @@ function showDetails(anime) {
     animeTrailer.src = "";
     animeTrailer.style.display = "none";
   }
-
   modal.style.display = "flex";
-}
-
-function closeModal() {
-  modal.style.display = "none";
-  animeTrailer.src = "";
 }
 
 function clearSearch() {
@@ -77,25 +68,11 @@ function clearSearch() {
   resultsDiv.innerHTML = "";
 }
 
-// Optional auto-recommend logic
-function showRandomRecommendation() {
-  if (!recommendContent || topAnimeList.length === 0) return;
-  const anime = topAnimeList[Math.floor(Math.random() * topAnimeList.length)];
-  recommendContent.innerHTML = `
-    <img src="${anime.images.jpg.image_url}" alt="${anime.title}">
-    <h3>${anime.title}</h3>
-    <p><strong>Score:</strong> ⭐ ${anime.score || 'N/A'} • <strong>Episodes:</strong> ${anime.episodes || 'N/A'}</p>
-  `;
+function closeModal() {
+  modal.style.display = "none";
+  animeTrailer.src = "";
 }
 
-function startAutoRecommend() {
-  if (recommendContent) {
-    showRandomRecommendation();
-    setInterval(showRandomRecommendation, 5000);
-  }
-}
-
-// Event listeners
 document.getElementById("topAnime").addEventListener("click", showTopAnime);
 document.getElementById("clearResults").addEventListener("click", clearSearch);
 modalClose.addEventListener("click", closeModal);
@@ -103,5 +80,4 @@ window.addEventListener("click", (e) => {
   if (e.target === modal) closeModal();
 });
 
-// Load on start
 window.onload = showTopAnime;
