@@ -1,7 +1,6 @@
 :root {
   --bg: #140024;
   --accent: #ff00cc;
-  --card: rgba(255, 255, 255, 0.07);
   --shadow: #ff00cc55;
 }
 
@@ -65,88 +64,49 @@ button:hover {
 
 #results {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
   padding: 0 1rem;
 }
 
-.card {
-  background: var(--card);
+.anime-box {
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 1rem;
-  backdrop-filter: blur(10px);
+  text-align: center;
   box-shadow: 0 0 20px var(--shadow);
   transition: transform 0.3s ease;
-  cursor: pointer;
 }
 
-.card:hover {
+.anime-box:hover {
   transform: translateY(-6px);
 }
 
-.card img {
+.anime-box img {
   width: 100%;
-  height: 340px;
-  border-radius: 10px;
+  height: 400px;
   object-fit: cover;
+  border-radius: 12px;
 }
 
-.title {
-  font-size: 1.2rem;
-  font-weight: bold;
+.anime-box h3 {
   color: #ffccff;
-  margin-top: 0.5rem;
+  font-size: 1.3rem;
+  margin: 0.8rem 0 0.4rem;
 }
 
-.info, .synopsis {
+.anime-box .info {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 0.4rem;
+}
+
+.anime-box .synopsis {
   font-size: 0.9rem;
-  margin: 0.4rem 0;
-}
-
-.synopsis {
-  max-height: 80px;
+  color: #aaa;
+  max-height: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-#modal {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-#modalContent {
-  background: #1c002a;
-  border-radius: 10px;
-  max-width: 90%;
-  width: 600px;
-  padding: 1rem;
-  color: #fff;
-  position: relative;
-}
-
-#modalContent h2 {
-  margin-top: 0;
-}
-
-#modalContent iframe {
-  width: 100%;
-  height: 315px;
-  border: none;
-  border-radius: 10px;
-}
-
-#modalClose {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--accent);
 }
 
 footer {
@@ -155,4 +115,4 @@ footer {
   padding: 1rem;
   font-size: 0.9rem;
   color: #aaa;
-  }
+}
