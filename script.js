@@ -10,26 +10,40 @@ searchInput.addEventListener('keyup', async function (e) {
   const query = e.target.value.trim();
   if (query.length < 3) return;
 
-  const res = await fetch(`https://api.jikan.moe/v4/anime?q=${encodeURIComponent(query)}&limit=10`);
-  const json = await res.json();
-  displayResults(json.data);
+  try {
+    const res = await fetch(`https://api.jikan.moe/v4/anime?q=${encodeURIComponent(query)}&limit=10`);
+    const json = await res.json();
+    displayResults(json.data);
+  } catch (err) {
+    resultsDiv.innerHTML = `<p style="color:red;">Failed to fetch results. Try again later.</p>`;
+  }
 });
 
 async function showTopAnime() {
-  const res = await fetch("https://api.jikan.moe/v4/top/anime?limit=10");
-  const json = await res.json();
-  displayResults(json.data);
+  try {
+    const res = await fetch("https://api.jikan.moe/v4/top/anime?limit=10");
+    const json = await res.json();
+    displayResults(json.data);
+  } catch (err) {
+    resultsDiv.innerHTML = `<p style="color:red;">Top anime could not be loaded.</p>`;
+  }
 }
 
 function displayResults(data) {
   resultsDiv.innerHTML = data.map(anime => `
-    <div class="anime-box" onclick='showDetails(${JSON.stringify(anime).replace(/'/g, "&#39;")})'>
-      <img src="${anime.images.jpg.image_url}" alt="${anime.title}" />
-      <h3>${anime.title}</h3>
-      <div class="info">Rating: ${anime.score || 'N/A'} | ${anime.type} | ${anime.episodes || '?'} ep</div>
+    <div class="card" onclick='showDetails(${JSON.stringify(anime).replace(/'/g, "&#39;")})'>
+      <img src="${anime.images.jpg.image_url}" alt="${anime.title}">
+      <div class="title">${anime.title}</div>
+      <div class="info">Type: ${anime.type} • Episodes: ${anime.episodes || '?'}</div>
+      <div class="info">Score: ⭐ ${anime.score || 'N/A'}</div>
       <div class="synopsis">${anime.synopsis || 'No synopsis available.'}</div>
     </div>
   `).join('');
+}
+
+function clearSearch() {
+  searchInput.value = "";
+  resultsDiv.innerHTML = "";
 }
 
 function showDetails(anime) {
@@ -56,15 +70,11 @@ function showDetails(anime) {
 
 function closeModal() {
   modal.style.display = "none";
-  animeTrailer.src = ""; // Stop video
-}
-
-function clearSearch() {
-  searchInput.value = "";
-  resultsDiv.innerHTML = "";
+  animeTrailer.src = "";
 }
 
 document.getElementById("topAnime").addEventListener("click", showTopAnime);
 document.getElementById("clearResults").addEventListener("click", clearSearch);
 modalClose.addEventListener("click", closeModal);
+
 window.onload = showTopAnime;
